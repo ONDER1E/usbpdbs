@@ -126,7 +126,4 @@ This app modifies system-level power settings. Use at your own risk. Improper th
 
 ## Licence
 
-See [LICENCE](https://www.google.com/search?q=./LICENCE).
-
-```
-```
+See [LICENCE](https://github.com/ONDER1E/tbp-android/blob/main/LICENCE).
