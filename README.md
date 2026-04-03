@@ -1,106 +1,39 @@
 # TBP Android — USB PD Bypass Monitor
 
-A native Android app that monitors battery level and automatically toggles **USB PD battery bypass (pass-through) mode** via the **Shizuku API** — no Termux required.
+A native Android app that monitors battery level and automatically toggles **USB PD battery bypass (pass-through) mode** via the **Shizuku API**.
 
-This is the native successor to [tbp](https://github.com/ONDER1E/tbp), which accomplished the same goal using shell scripts in Termux. This version runs as a proper Android foreground service, integrates directly with Shizuku over IPC, and does not require a persistent wakelock to function.
+This is the native successor to [tbp](https://github.com/ONDER1E/tbp). It runs as a proper Android foreground service and includes a "Self-Healing" recovery system to maintain the bypass state even if Shizuku or WiFi drops.
 
 ---
 
 ## Why This Exists
 
-The original shell-based tbp worked well, but had fundamental limitations:
-
-- Required Termux and a manually acquired wakelock to stay alive
-- The wakelock prevented the SoC from entering deep sleep states
-- Battery reads relied on spawning `dumpsys` subprocesses every 5 seconds
-- Notification actions required `termux-dialog` with fragile JSON parsing
-- No boot autostart without Termux:Boot
-
-This app replaces all of that with native Android equivalents.
+The original shell-based tbp relied on a 5-second polling loop, which kept the CPU active. This app replaces that with a native, event-driven architecture:
+- **Zero Polling:** The app does not "check" the battery on a timer. It waits for the Android OS to notify it of changes.
+- **Deep Sleep Friendly:** Allows the SoC to enter deep sleep states between battery events, significantly reducing background power consumption.
+- **Native IPC:** Integrates directly with the Shizuku API for privileged system calls.
 
 ---
 
 ## How It Works
 
-Instead of polling every 5 seconds, the app registers for Android's `ACTION_BATTERY_CHANGED` broadcast. The CPU is not woken on a timer — it only wakes when the battery level actually changes, which on a plugged-in device with bypass active is infrequent.
+The app utilizes a Foreground Service that remains idle until triggered by system events.
 
-1. Listens for `ACTION_BATTERY_CHANGED` broadcast
-2. Compares battery level against configured thresholds
-3. If a change is needed, calls `settings put system pass_through <0|1>` via Shizuku IPC
-4. Updates the persistent foreground notification
-5. Goes back to sleep — no polling, no wakelock held between events
-
----
-
-## Features
-
-- Event-driven battery monitoring — no continuous polling
-- No persistent wakelock — SoC can enter deep sleep between events
-- Shizuku API integration via direct IPC binder (no `rish` subprocess)
-- Persistent foreground notification with Pause / Resume / Exit actions
-- Hysteresis zone between thresholds to prevent rapid toggling
-- Minimum cooldown between state changes
-- Configurable thresholds via in-app settings
-- Autostart on boot via `BOOT_COMPLETED` receiver
-- Verbose logging
+1. **Event Listening:** The service registers a receiver for `ACTION_BATTERY_CHANGED`. 
+2. **Reactive Logic:** When the battery level changes, the app wakes up, compares the new level against your **Enable/Disable** thresholds, and decides if action is needed.
+3. **Execution:** Toggles `settings put system pass_through <0|1>` via Shizuku.
+4. **Self-Healing:** If the Shizuku connection is lost (e.g., after a reboot or WiFi toggle), the app uses a local `rish` binary and Termux `RunCommand` to automatically restore the environment.
 
 ---
 
-## Requirements
+## Build Tutorial
 
-- Android 8.0+ (API 26)
-- [Shizuku](https://shizuku.rikka.app/) — running and authorised
-- USB-PD charger (PPS recommended)
-- A device that supports bypass charging via `settings put system pass_through`
+### Prerequisites
+- **JDK 17** or higher.
+- **Android SDK** (Command line tools or Android Studio).
 
-> See the [original tbp repo](https://github.com/ONDER1E/tbp) for the full device compatibility list.
-
----
-
-## Installation
-
-> APK releases coming soon. For now, build from source.
-```bash
-git clone https://github.com/ONDER1E/tbp-android.git
-```
-
-Open in Android Studio, build, and sideload the APK onto your device.
-
-Grant Shizuku permission when prompted on first launch.
-
----
-
-## Device Compatibility
-
-This app uses the same `pass_through` system setting as the original shell scripts. Compatibility is identical — see the [tbp README](https://github.com/ONDER1E/tbp#device-compatibility) for the full list of supported device families (Samsung, ASUS ROG, Sony Xperia, RedMagic, Black Shark).
-
----
-
-## Differences from tbp (Shell Version)
-
-| Feature | tbp (shell) | tbp-android (this) |
-|---|---|---|
-| Runtime | Termux | Native Android |
-| Battery reading | `dumpsys` via rish | `BatteryManager` API |
-| Shizuku comms | `rish` subprocess | Direct IPC binder |
-| Monitoring method | 5s polling loop | `ACTION_BATTERY_CHANGED` event |
-| Persistent wakelock | ✅ Required | ❌ Not needed |
-| Boot autostart | Termux:Boot | `BOOT_COMPLETED` receiver |
-| Notification actions | `termux-dialog` | Native `PendingIntent` |
-| Hysteresis | ✅ | ✅ |
-| Cooldown timer | ✅ | ✅ |
-
----
-
-## Safety Disclaimer
-
-This app modifies system settings via Shizuku.
-Use at your own risk.
-
-Improper charger setups or unsupported devices may cause unexpected behaviour.
-
----
-
-## Licence
-
-See [LICENCE](./LICENCE).
+### Build Steps (Windows)
+1. Clone the repository:
+   ```powershell
+   git clone [https://github.com/ONDER1E/tbp-android.git](https://github.com/ONDER1E/tbp-android.git)
+   cd tbp-android
