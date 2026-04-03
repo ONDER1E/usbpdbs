@@ -67,7 +67,7 @@ To enable "Self-Healing" and allow the app to work without a PC:
 2.  **Permissions Tab:**
       - Tap **Copy Rish from /sdcard** to move them to internal storage.
       - Tap **Grant via Shizuku** under Write Secure Settings.
-3.  **Battery:** Set TBP Android to **Unrestricted** battery usage.
+3.  **Battery:** Set usb pd bd to **Unrestricted** battery usage.
 
 -----
 
