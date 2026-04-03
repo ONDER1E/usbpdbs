@@ -1,0 +1,22 @@
+# --- The 'Garbage' (Do NOT track) ---
+build/
+app/build/
+.gradle/
+bin/
+gen/
+out/
+
+# --- Local Environment (Do NOT track) ---
+local.properties
+wifi_test.txt
+.idea/
+.vscode/
+*.iml
+
+# --- The 'Recipe' (DO track) ---
+# (Note: You don't usually list what to track in a gitignore, 
+# but ensure these are NOT in the list above)
+# build.gradle.kts
+# settings.gradle.kts
+# gradlew
+# gradlew.bat
