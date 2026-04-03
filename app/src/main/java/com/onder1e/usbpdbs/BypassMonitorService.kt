@@ -1,4 +1,4 @@
-package com.onder1e.tbpandroid
+package com.onder1e.usbpdbs
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -25,11 +25,11 @@ class BypassMonitorService : Service() {
         const val TAG = "BypassMonitor"
         const val NOTIF_ID = 7421
         const val CHANNEL_ID = "tbp_monitor"
-        const val ACTION_PAUSE = "com.onder1e.tbpandroid.PAUSE"
-        const val ACTION_RESUME = "com.onder1e.tbpandroid.RESUME"
-        const val ACTION_EXIT = "com.onder1e.tbpandroid.EXIT"
-        const val ACTION_RECOVER = "com.onder1e.tbpandroid.RECOVER"
-        const val ACTION_OPEN_SHIZUKU = "com.onder1e.tbpandroid.OPEN_SHIZUKU"
+        const val ACTION_PAUSE = "com.onder1e.usbpdbs.PAUSE"
+        const val ACTION_RESUME = "com.onder1e.usbpdbs.RESUME"
+        const val ACTION_EXIT = "com.onder1e.usbpdbs.EXIT"
+        const val ACTION_RECOVER = "com.onder1e.usbpdbs.RECOVER"
+        const val ACTION_OPEN_SHIZUKU = "com.onder1e.usbpdbs.OPEN_SHIZUKU"
         const val SHIZUKU_PKG = "moe.shizuku.privileged.api"
     }
 

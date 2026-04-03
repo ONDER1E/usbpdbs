@@ -48,7 +48,7 @@ Instead of polling every 5 seconds, the app registers for Android's `ACTION_BATT
 ### Build Steps (Windows)
 1. Clone the repository:
    ```powershell
-   git clone [https://github.com/ONDER1E/tbp-android.git](https://github.com/ONDER1E/tbp-android.git)
+   git clone [https://github.com/ONDER1E/usbpdbs.git](https://github.com/ONDER1E/usbpdbs.git)
    cd tbp-android
 
 2.  Build the Debug APK:
@@ -124,6 +124,16 @@ This app modifies system-level power settings. Use at your own risk. Improper th
 
 -----
 
+## Known issues
+
+There are known issues regarding the permissions of the following:
+- Write Secure Settings
+- Rish Setup
+Solutions can be found [here](https://github.com/ONDER1E/usbpdbs/blob/main/KNOWN_ISSUES.md)
+
+
+-----
+
 ## Licence
 
-See [LICENCE](https://github.com/ONDER1E/tbp-android/blob/main/LICENCE).
+See [LICENCE](https://github.com/ONDER1E/usbpdbs/blob/main/LICENCE).

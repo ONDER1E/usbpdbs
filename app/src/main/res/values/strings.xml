@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TBP Android</string>
+    <string name="app_name">usb pd bs</string>
     <string name="notif_channel_name">Bypass Monitor</string>
     <string name="notif_channel_desc">USB PD bypass charging monitor status</string>
     <string name="action_pause">Pause</string>

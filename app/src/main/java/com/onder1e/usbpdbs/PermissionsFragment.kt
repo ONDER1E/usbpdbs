@@ -1,4 +1,4 @@
-package com.onder1e.tbpandroid
+package com.onder1e.usbpdbs
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -157,7 +157,7 @@ class PermissionsFragment : Fragment() {
                 val rish = File(ctx.filesDir, "rish").absolutePath
                 val process = ProcessBuilder(
                     "sh", rish, "-c",
-                    "pm grant com.onder1e.tbpandroid android.permission.WRITE_SECURE_SETTINGS"
+                    "pm grant com.onder1e.usbpdbs android.permission.WRITE_SECURE_SETTINGS"
                 ).redirectErrorStream(true).start()
                 val output = process.inputStream.bufferedReader().readText()
                 process.waitFor()

@@ -3,10 +3,10 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 android {
-    namespace = "com.onder1e.tbpandroid"
+    namespace = "com.onder1e.usbpdbs"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.onder1e.tbpandroid"
+        applicationId = "com.onder1e.usbpdbs"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
