@@ -1,6 +1,3 @@
-My apologies—the nested backticks in the build commands likely tripped up the formatting. Here is the full, uninterrupted `README.md` content inside a single, clean code block.
-
-````markdown
 # TBP Android — USB PD Bypass Monitor
 
 A native Android app that monitors battery level and automatically toggles **USB PD battery bypass (pass-through) mode** via the **Shizuku API**.
@@ -53,7 +50,7 @@ Instead of polling every 5 seconds, the app registers for Android's `ACTION_BATT
    ```powershell
    git clone [https://github.com/ONDER1E/tbp-android.git](https://github.com/ONDER1E/tbp-android.git)
    cd tbp-android
-````
+```
 
 2.  Build the Debug APK:
     ```powershell
