@@ -1,4 +1,4 @@
-# TBP Android — USB PD Bypass Monitor
+# USB PD BS — Univeral Serial Bus Power Delivery Bypass Script
 
 A native Android app that monitors battery level and automatically toggles **USB PD battery bypass (pass-through) mode** via the **Shizuku API**.
 
