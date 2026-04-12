@@ -304,7 +304,7 @@ class BypassMonitorService : Service() {
             else        -> "USB PD Bypass Disabled"
         }
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_menu_manage)
+            .setSmallIcon(R.drawable.ic_stat_bolt)
             .setContentTitle(title)
             .setContentText(content)
             .setOngoing(true)
